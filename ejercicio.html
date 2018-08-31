@@ -54,13 +54,19 @@
 		</form>
 		<div class="row">
 			<div class="col-md-6">
+				<h5>Historial de selectores:</h5>
+			</div>
+			<div class="col-md-6">
+				<h5>Elementos seleccionados:</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
 				<div class="historial">
-					<h5>Historial de selectores:</h5>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="seleccionados">
-					<h5>Elementos seleccionados:</h5>
 				</div>
 			</div>
 		</div>
@@ -112,7 +118,34 @@
 </main>
 
 <script>
-	// Agregar las instrucciones JS para resolver el ejercicio aquí.
+	var selector = $("#camposelector")
+	var historial = $(".historial")
+	var seleccionados = $(".seleccionados")
+	$("#boton").click(function(){
+		if(selector.val() == ""){
+			alert("Debe ingresar un selector jQuery!")
+		}
+		else if(selector.val()[0] == "$"){
+
+			try {
+				var seval = eval(selector.val())
+				seval.fadeOut();
+				seval.fadeIn();
+				var hist = $("<p></p>").text(selector.val());
+				historial.append(hist);
+				var slt = $("<p></p>").text(seval.length);
+				seleccionados.append(slt); 
+			} catch (e) {
+			    if (e instanceof SyntaxError) {
+			    }
+			}
+			selector.val("");
+		}
+		else{
+			selector.val("");
+		}
+	});
+
 </script>
 
 </body>
